@@ -82,9 +82,70 @@ OR TRY_CAST(Delivery Date]AS DATE)IS NULL;
 **Alter**
 ALTER Table[Supply Chain Performance Data.xlsx]
 ALTER COLUMN[Defect Rate]FLOAT;
-
-
+**CASE WHEN (Automated Risk Status):**
+SELECT [Supplier Name], [Defect Rate],
+  CASE 
+      WHEN [Defect Rate] > 5 THEN 'High Risk'
+      WHEN [Defect Rate] BETWEEN 3 AND 5 THEN 'Medium Risk'
+      ELSE 'Low Risk'
+  END AS RiskStatus
+  FROM [dbo].[Supply Chain Parformance Data];
+  **SQL Joins(Merging Data Tables)**
+  SELECT Orders.OrderID, Orders.OrderDate, Suppliers.SupplierName
+FROM Orders
+INNER JOIN Suppliers ON Orders.SupplierID = Suppliers.SupplierID;
+**DATEDIFF(Lead Time Calculation)**
+SELECT [Supplier Name], [Order Date], [Delivery Date],
+DATEDIFF(day, [Order Date], [Delivery Date]) AS LeadTimeDays
+FROM [dbo].[Supply Chain Performance Data];
+**Grouping & Aggregations(Summarized Reporting)**
+SELECT [Supplier Name], 
+       COUNT([Order ID]) AS TotalOrders,
+       SUM([Total Units]) AS TotalProduction,
+       AVG([Defect Rate]) AS AvgDefectRate
+FROM [dbo].[Supply Chain Performance Data]
+GROUP BY [Supplier Name];
+**COALESCE**
+SELECT
+     COALESCE(SupplierName, 
+     'Unknown') FROM Suppliers;
+**HAVING**
+SELECT SupplierID,
+COUNT(OrderID) FROM Orders 
+GROUP BY SupplierID HAVING 
+COUNT(OrderID) > 10;
 ### Technical Skills Demonstrated
+1. Advanced Data Automation (Excel Expertise - 50+ Functions):
+
+Dynamic Lookup & Reference: Expert in XLOOKUP, INDEX-MATCH, OFFSET, and INDIRECT for building automated reporting systems.
+
+Array Formulas: Utilizing FILTER, UNIQUE, SORT, and SEQUENCE to create dynamic, self-updating dashboards.
+
+Precision Reporting: Leveraged AGGREGATE, SUBTOTAL, and IFERROR to ensure 100% accuracy in large industrial datasets.
+
+ETL Processes: Proficient in Power Query for advanced data cleaning, merging, and transformation.
+
+2. Business Intelligence & Analytics (Power BI & DAX):
+
+Advanced DAX Modeling: Skilled in complex measures using CALCULATE, ALLSELECTED, FILTER, and KEEPFILTERS.
+
+Time Intelligence: Implementation of SAMEPERIODLASTYEAR, DATEADD, TOTALMTD, and TOTALYTD for YoY and MoM performance tracking.
+
+KPI Development: Created performance metrics using RANKX, DIVIDE, SWITCH, and RELATED to monitor production efficiency.
+
+Context Control: Expertise in managing filter context through proper relationship modeling and USERELATIONSHIP.
+
+3. Database Management & SQL:
+
+Industrial Querying: Proficient in SELECT, CASE WHEN logic, and complex JOINS (Inner, Left, Right) to extract insights from ERP databases.
+
+Data Aggregation: Skilled in using GROUP BY, HAVING, and COUNT/SUM to summarize supply chain operational data.
+
+Advanced Formatting: Expert in DATEDIFF and DATE_FORMAT for calculating lead times and logistics cycles.
+
+4. Supply Chain & MIS Operations:
+
+Operational Excellence: Track record of using data to identify bottlenecks, resulting in a 10% reduction in wastage.
 
 
 ### Business Impact
